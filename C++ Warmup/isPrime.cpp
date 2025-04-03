@@ -2,7 +2,6 @@
 // Created by Epics on 4/2/2025.
 //
 #include "isPrime.h"
-
 #include <iostream>
 #include <ostream>
 
@@ -29,7 +28,7 @@ bool isPrime(int number) {
 int main() {
     std::cout << "Testing isPrime" << std::endl;
     std::cout << "===================" << std::endl;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i <= 10; i++) {
         std::cout << "The current number is: " << i;
         if (isPrime(i)) {
             std::cout << " is a prime number!" << std::endl;
