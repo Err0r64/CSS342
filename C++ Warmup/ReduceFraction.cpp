@@ -7,7 +7,6 @@
 
 /*
  *  A helper method to find the largest common denominator
- *  Ideally
  */
 int largestCommonDenominator(int numerator, int denominator) {
     for (int i = numerator; i > 0; i--) {
@@ -19,7 +18,10 @@ int largestCommonDenominator(int numerator, int denominator) {
 
 /*
  *  Method reduces any given fraction to it's simplest form.
- *
+ *  Separates the given string fraction into it's two "numbers" and divider
+ *      Converts the "numbers" into integers, find the common denominator between these numbers,
+ *      and reduces them on the common denominator found.
+ *  Returns a rebuilt string of the reduced fraction.
  */
 std::string reduceFraction(std::string fraction) {
     int indexOfDivider = fraction.find('/');
