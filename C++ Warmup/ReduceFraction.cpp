@@ -5,12 +5,35 @@
 #include "ReduceFraction.h"
 #include <iostream>
 
-std::string reduceFraction(std::string fraction) {
+/*
+ *  A helper method to find the largest common denominator
+ *  Ideally
+ */
+int largestCommonDenominator(int numerator, int denominator) {
+    for (int i = numerator; i > 0; i--) {
+        if (denominator % i == 0 && numerator % i == 0) {
+            return i;
+        }
+    }
+}
 
-    return "";
+/*
+ *  Method reduces any given fraction to it's simplest form.
+ *
+ */
+std::string reduceFraction(std::string fraction) {
+    int indexOfDivider = fraction.find('/');
+    int numerator = stoi(fraction.substr(0, indexOfDivider));
+    int denominator = stoi(fraction.substr(indexOfDivider + 1, fraction.length()));
+
+    int lcd =  largestCommonDenominator(numerator, denominator);
+    return std::to_string(numerator/lcd) + "/" + std::to_string(denominator/lcd);
 }
 
 int main() {
-
+    std::cout << reduceFraction("2/3") << std::endl;
+    std::cout << reduceFraction("3/2") << std::endl;
+    std::cout << reduceFraction("12/14") << std::endl;
+    std::cout << reduceFraction("12/18") << std::endl;
     return 0;
 }
