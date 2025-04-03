@@ -9,7 +9,9 @@
 /*
  *Method checks if a [number] is a prime number.
  *Any number that is equal to or less than one is guaranteed non-prime.
- *The loop checks if the number is divisible by anything other than itself and 1.
+ *The loop checks if the number is divisible by anything other than itself and 1
+ *  (Looks like we only need to check half of the numbers from 2 - number therefore
+ *  number is divided in half in the loop, this saves time).
  *Returns true if it does not match any of this criteria.
  */
 bool isPrime(int number) {

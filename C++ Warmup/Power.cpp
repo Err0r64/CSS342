@@ -64,7 +64,7 @@ int main() {
   }
 
   printf("========================\n");
-  printf("Printing non-loop results\n");
+  printf("Printing loop results\n");
   printf("========================\n");
   for (int num = 0; num < 10; num++) {
     std::cout << "Num = " << num << " Is power of two: " << is_power_of_two_Loop(num) << std::endl;
