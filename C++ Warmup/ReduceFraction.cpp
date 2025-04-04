@@ -4,17 +4,97 @@
 
 #include "ReduceFraction.h"
 #include <iostream>
+#include <array>
 
 /*
- *  A helper method to find the largest common denominator
+following class demonstration
  */
-int largestCommonDenominator(int numerator, int denominator) {
-    for (int i = numerator; i > 0; i--) {
-        if (denominator % i == 0 && numerator % i == 0) {
+class Fraction {
+  public:
+    int numerator;
+    int denominator;
+
+    // I prefer the java constructor
+    // Fraction(int numerator, int denominator) : numerator(numerator), denominator(denominator) {}
+
+
+
+    Fraction(int numerator, int denominator) {
+      this->numerator = numerator;
+      this->denominator = denominator;
+    }
+
+    std::string toString() {
+        return std::to_string(numerator) + "/" + std::to_string(denominator);
+    }
+
+};
+
+/*
+ *A helper method to find the largest common denominator
+ */
+int largestCommonDenominator(Fraction input) {
+    for (int i = input.numerator; i > 0; i--) {
+        if (input.denominator % i == 0 && input.numerator % i == 0) {
             return i;
         }
     }
 }
+
+Fraction reduce(Fraction input) {
+    int indexOfDivider = input.toString().find('/');
+    int numerator = stoi(input.toString().substr(0, indexOfDivider));
+    int denominator = stoi(input.toString().substr(indexOfDivider + 1, input.toString().length()));
+
+    int lcd =  largestCommonDenominator(input);
+    input.numerator = numerator / lcd;
+    input.denominator = denominator / lcd;
+    return Fraction(numerator, denominator);
+}
+
+//  operator overloading
+//     bool operator==(Fraction &other) {
+//     return this->numerator == other.numerator &&
+//            this->denominator == other.denominator;
+// }
+
+void test() {
+    /* reduce given fraction to minimum terms
+     * 2/4 = 1/2
+     * 4/2 = 2/1
+     * 6/8 = 3/4
+     * Given an input, the actual output should match the expected output
+    */
+    Fraction input[] = {Fraction(1, 2),
+                        Fraction(2,4),
+                        Fraction(4, 2),
+                        Fraction(6, 8)};
+
+    Fraction expected_output[] = {Fraction(1, 2),
+                                  Fraction(1, 2),
+                                  Fraction(2, 1),
+                                  Fraction(3, 4)};
+
+
+    //call the function
+    for (int i = 0; i < sizeof(input)/sizeof(*input); i++) {
+        if (reduce(input[i]).denominator == expected_output[i].denominator &&
+            reduce(input[i]).numerator   == expected_output[i].numerator) {
+
+            std::cout << "Test passed" << std::endl;
+        } else {
+            std::cout << "Test failed! Case: " << input[i].toString() << std::endl;
+        }
+    }
+
+    //compare expected vs actual
+
+}
+
+
+
+
+
 
 /*
  *  Method reduces any given fraction to it's simplest form.
@@ -23,19 +103,24 @@ int largestCommonDenominator(int numerator, int denominator) {
  *      and reduces them on the common denominator found.
  *  Returns a rebuilt string of the reduced fraction.
  */
-std::string reduceFraction(std::string fraction) {
-    int indexOfDivider = fraction.find('/');
-    int numerator = stoi(fraction.substr(0, indexOfDivider));
-    int denominator = stoi(fraction.substr(indexOfDivider + 1, fraction.length()));
-
-    int lcd =  largestCommonDenominator(numerator, denominator);
-    return std::to_string(numerator/lcd) + "/" + std::to_string(denominator/lcd);
-}
+// std::string reduceFraction(std::string fraction) {
+//     int indexOfDivider = fraction.find('/');
+//     int numerator = stoi(fraction.substr(0, indexOfDivider));
+//     int denominator = stoi(fraction.substr(indexOfDivider + 1, fraction.length()));
+//
+//     int lcd =  largestCommonDenominator(numerator, denominator);
+//     return std::to_string(numerator/lcd) + "/" + std::to_string(denominator/lcd);
+// }
 
 int main() {
-    std::cout << reduceFraction("2/3") << std::endl;
-    std::cout << reduceFraction("3/2") << std::endl;
-    std::cout << reduceFraction("12/14") << std::endl;
-    std::cout << reduceFraction("12/18") << std::endl;
+    // Fraction num1 = Fraction(1, 10);
+    // std::cout << num1.toString() << std::endl;
+    //
+    // std::cout << reduceFraction("2/3") << std::endl;
+    // std::cout << reduceFraction("3/2") << std::endl;
+    // std::cout << reduceFraction("12/14") << std::endl;
+    // std::cout << reduceFraction("12/18") << std::endl;
+
+    test();
     return 0;
 }
