@@ -3,7 +3,6 @@
 //
 
 #include "Power.h"
-
 #include <iostream>
 #include <ostream>
 
