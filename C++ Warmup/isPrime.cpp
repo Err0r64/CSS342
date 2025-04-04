@@ -27,7 +27,7 @@ bool isPrime(int number) {
     return true;
 }
 
-int main() {
+void test() {
     std::cout << "Testing isPrime" << std::endl;
     std::cout << "===================" << std::endl;
     for (int i = 0; i <= 10; i++) {
@@ -38,4 +38,8 @@ int main() {
             std::cout << " is not a prime number!" << std::endl;
         }
     }
+}
+
+int main() {
+    test();
 }

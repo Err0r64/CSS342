@@ -41,36 +41,37 @@ bool is_power_of_two_Loop(int num) {
   }
 }
 
-void printResult(bool result) {
+std::string printResult(bool result) {
   if (result == true) {
-    printf("is a power of 2\n");
+    return " is a power of 2";
   } else {
-    printf("is not a power of 2\n");
+    return " is NOT a power of 2";
   }
+}
+
+void loopTest() {
+  printf("Printing loop results\n");
+  printf("========================\n");
+  for (int num = 0; num < 10; num++) {
+    std::cout << num << printResult(is_power_of_two_Loop(num)) << std::endl;
+  }
+  printf("========================\n");
+}
+
+void nonLoopTest() {
+  printf("Printing non-loop results\n");
+  printf("========================\n");
+  for (int num = 0; num < 10; num++) {
+    std::cout << num << printResult(is_power_of_two(num)) << std::endl;
+  }
+  printf("========================\n");
 }
 
 
 int main() {
-
-  bool result = is_power_of_two(1);
-  bool resultLoop = is_power_of_two(1);
-  std::cout << result;
-
-
-  printf("Printing non-loop results\n");
-  printf("========================\n");
-  for (int num = 0; num < 10; num++) {
-    std::cout << "Num = " << num << " Is power of two: " << is_power_of_two(num) << std::endl;
-  }
-
-  printf("========================\n");
-  printf("Printing loop results\n");
-  printf("========================\n");
-  for (int num = 0; num < 10; num++) {
-    std::cout << "Num = " << num << " Is power of two: " << is_power_of_two_Loop(num) << std::endl;
-  }
-
-
+  nonLoopTest();
+  loopTest();
+  return 0;
 }
 
 
