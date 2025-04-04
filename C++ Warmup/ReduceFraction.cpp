@@ -43,7 +43,7 @@ int largestCommonDenominator(Fraction input) {
  * This method reduces any fraction to it's simplest form by dividing both the numerator and denominator by the
  *  largest common denominator.
  * The method returns the input fraction but in it's reduced form.
- * METHOD ASSUMES ALL FRACTIONS ARE VALID (but i put a try catch in there just for fun)
+ * METHOD ASSUMES ALL FRACTIONS ARE VALID (but i tried experimenting with a try catch to throw a readable error)
  */
 Fraction reduce(Fraction input) {
     try {
@@ -65,7 +65,7 @@ Fraction reduce(Fraction input) {
         return input;
 
     } catch (std::runtime_error) {
-        std::cout << "ERROR: DIVISION BY ZERO" << std::endl;
+        std::cerr << "ERROR: DIVISION BY ZERO" << std::endl;
     }
 
 
