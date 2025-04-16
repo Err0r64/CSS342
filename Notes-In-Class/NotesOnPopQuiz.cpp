@@ -10,6 +10,7 @@ class Book {
    * Private Variables
    *     Name of the book, genre, author, publisher, date of publication.
    */
+
     private:
         std::string author;
         std::string title;
@@ -29,19 +30,19 @@ class Book {
         this->id = id++;
     }
 
-    int getPublishedDate() {
+    int getPublishedDate() const {
         return published_date;
     }
 
-    int getId() {
+    int getId() const {
         return id;
     }
 
-    std::string getAuthor() {
+    std::string getAuthor() const {
         return author;
     }
 
-    std::string getTitle() {
+    std::string getTitle() const {
         return title;
     }
 
@@ -67,15 +68,19 @@ Book copy_a_book(Book originalBook) {
     return *copy;
 }
 
-Book* copy_books(const Book& originalBook, int n) {
+
+Book* copy_books(const Book& originalBook, const int n) {
     if (n<=0) {
         return nullptr;
     }
     Book *books = new Book[n];
 
-    Book currentBook = copy_a_book(originalBook);
+    // Create a book with the same details without incrementing ID because of copying
+    Book currentBook = Book(originalBook.getAuthor(), originalBook.getTitle(), originalBook.getPublishedDate(),
+                            originalBook.getId());
+
     for (int i = 0; i < n; i++) {
-        // Copy the book
+        // Copy the book to the array
         books[i] = copy_a_book(currentBook);
         currentBook = books[i];
     }
@@ -92,19 +97,19 @@ Book* copy_books(const Book& originalBook, int n) {
  */
 int main() {
     // We want to manage some books.
-    std::cout << "<<< PRINTING RESULTS FROM FIRST BOOK >>> " << std::endl;
+    std::cout << "<<< PRINTING RESULTS FROM FIRST BOOK >>> \n" << std::endl;
     Book *book = new Book("Alec", "Rock, Paper, Scissors", 2004, 1);
     std::cout << book->toString() << std::endl;
     std::cout << " +==================================+ " << std::endl;
 
-    std::cout << "<<< PRINTING THE THE COPY >>>" << std::endl;
-    Book book_copy = copy_a_book(*book);
+    std::cout << "<<< PRINTING THE THE COPY >>>\n" << std::endl;
+    Book book_copy = copy_a_book(*book); // ID should be 2
     std::cout << book_copy.toString() << std::endl;
     std::cout << " +==================================+ " << std::endl;
 
-    std::cout << "<<< COPYING BOOKS INTO ARRAY >>>" << std::endl;
-    Book* copies = copy_books(book_copy, 2);
-    std::cout << "<<< PRINTING THE ARRAY OF COPIES >>>" << std::endl;
+    std::cout << "<<< COPYING BOOKS INTO ARRAY >>>\n" << std::endl;
+    Book* copies = copy_books(book_copy, 2); //ID should be 3 and 4
+    std::cout << "<<< PRINTING THE ARRAY OF COPIES >>>\n" << std::endl;
     for (int i = 0; i < 2; i++) {
         std::cout << "Copies: " << copies[i].toString() << std::endl;
     }
